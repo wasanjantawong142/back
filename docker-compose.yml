@@ -1,20 +1,21 @@
-version: '3'
+version: '2'
 services:
-  db:
-    image: mariadb:10.3
-    restart: on-failure
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
-    ports:
-      - 3306:3306
-    environment:
-      - MYSQL_DATABASE=bom
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=user
-      - MYSQL_ROOT_PASSWORD=toor
+
+  php:
+    image: php:7-apache
+    container_name: lemp_php7_apache
+    restart: always
     volumes:
-      - ./db_dumps:/docker-entrypoint-initdb.d
-#      - /data/mysql:/var/lib/mysql
-  redis:
-    image: redis:alpine
+      - ./html/:/var/www/html
     ports:
-      - 2376:2376
+      - 80:80
+
+  db:
+    image: mariadb:latest
+    container_name: lemp_mariadb
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=11111111
+      - MYSQL_DATABASE=lemp_db
+      - MYSQL_USER=lemp
+      - MYSQL_PASSWORD=00000000
