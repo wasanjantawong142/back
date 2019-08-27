@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2019 at 03:35 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Generation Time: Aug 27, 2019 at 04:43 AM
+-- Server version: 10.3.16-MariaDB
+-- PHP Version: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,8 +21,6 @@ SET time_zone = "+07:00";
 --
 -- Database: `bom_demo_test`
 --
-CREATE DATABASE IF NOT EXISTS `bom_demo_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `bom_demo_test`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +28,6 @@ USE `bom_demo_test`;
 -- Table structure for table `bd_info`
 --
 
-DROP TABLE IF EXISTS `bd_info`;
 CREATE TABLE `bd_info` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -52,7 +49,7 @@ INSERT INTO `bd_info` (`id`, `name`, `type`, `ratio_engcost`, `version`, `create
 (48, 'HPE', 'INET', 0.8, NULL, '2019-05-11 15:10:48', '60336', 1),
 (49, 'Nutanix', 'INET', 0.8, NULL, '2019-05-11 15:10:48', '60336', 1),
 (50, 'VDI', 'INET', 0.8, NULL, '2019-05-11 15:10:48', '60336', 1),
-(51, 'UNIX', 'INET', 0.8, NULL, '2019-05-11 15:10:48', '60336', 0),
+(51, 'UNIX', 'INET', 0.8, NULL, '2019-05-11 15:10:48', '60336', 1),
 (52, 'Talk to me', 'JV', 0.9, NULL, '2019-05-11 15:10:48', '60336', 1),
 (53, 'Service plus', 'INET', 0.8, NULL, '2019-05-11 15:10:48', '60336', 1),
 (54, 'OpenLandScape', 'JV', 0.9, NULL, '2019-05-11 15:10:48', '60336', 1),
@@ -75,7 +72,6 @@ INSERT INTO `bd_info` (`id`, `name`, `type`, `ratio_engcost`, `version`, `create
 -- Table structure for table `bd_log`
 --
 
-DROP TABLE IF EXISTS `bd_log`;
 CREATE TABLE `bd_log` (
   `id` int(11) NOT NULL,
   `id_bd` int(11) NOT NULL,
@@ -114,7 +110,10 @@ INSERT INTO `bd_log` (`id`, `id_bd`, `case_log`, `create_date`, `create_by`) VAL
 (45, 65, 'CREATE', '2019-07-24 14:51:15', '60336'),
 (46, 66, 'CREATE', '2019-07-24 15:01:18', '60336'),
 (47, 65, 'EDIT', '2019-07-24 15:01:36', '60336'),
-(48, 65, 'BLOCK', '2019-07-24 15:26:27', '60336');
+(48, 65, 'BLOCK', '2019-07-24 15:26:27', '60336'),
+(49, 46, 'BLOCK', '2019-08-22 13:15:02', '60336'),
+(50, 46, 'UNBLOCK', '2019-08-22 13:15:03', '60336'),
+(51, 51, 'UNBLOCK', '2019-08-22 13:15:51', '60336');
 
 -- --------------------------------------------------------
 
@@ -122,7 +121,6 @@ INSERT INTO `bd_log` (`id`, `id_bd`, `case_log`, `create_date`, `create_by`) VAL
 -- Table structure for table `bom_bd`
 --
 
-DROP TABLE IF EXISTS `bom_bd`;
 CREATE TABLE `bom_bd` (
   `id` int(11) NOT NULL,
   `id_bom` int(11) NOT NULL,
@@ -184,7 +182,6 @@ INSERT INTO `bom_bd` (`id`, `id_bom`, `id_bd`, `bd_name`, `inuse`) VALUES
 -- Table structure for table `bom_bd_log`
 --
 
-DROP TABLE IF EXISTS `bom_bd_log`;
 CREATE TABLE `bom_bd_log` (
   `id` int(11) NOT NULL,
   `id_bom` int(11) NOT NULL,
@@ -357,7 +354,6 @@ INSERT INTO `bom_bd_log` (`id`, `id_bom`, `bd_name`, `case_log`, `create_date`, 
 -- Table structure for table `bom_bd_old`
 --
 
-DROP TABLE IF EXISTS `bom_bd_old`;
 CREATE TABLE `bom_bd_old` (
   `id` int(11) NOT NULL,
   `id_bom_old` int(11) NOT NULL,
@@ -480,7 +476,6 @@ INSERT INTO `bom_bd_old` (`id`, `id_bom_old`, `id_bd`, `bd_name`, `inuse`) VALUE
 -- Table structure for table `bom_diagram`
 --
 
-DROP TABLE IF EXISTS `bom_diagram`;
 CREATE TABLE `bom_diagram` (
   `id` int(11) NOT NULL,
   `id_bom` int(11) NOT NULL,
@@ -512,7 +507,6 @@ INSERT INTO `bom_diagram` (`id`, `id_bom`, `path`, `img_name`, `inuse`) VALUES
 -- Table structure for table `bom_diagram_old`
 --
 
-DROP TABLE IF EXISTS `bom_diagram_old`;
 CREATE TABLE `bom_diagram_old` (
   `id` int(11) NOT NULL,
   `id_bom_old` int(11) NOT NULL,
@@ -552,7 +546,6 @@ INSERT INTO `bom_diagram_old` (`id`, `id_bom_old`, `path`, `img_name`, `inuse`) 
 -- Table structure for table `bom_item`
 --
 
-DROP TABLE IF EXISTS `bom_item`;
 CREATE TABLE `bom_item` (
   `id` int(11) NOT NULL,
   `id_bom` int(11) NOT NULL,
@@ -672,7 +665,6 @@ INSERT INTO `bom_item` (`id`, `id_bom`, `id_bd`, `bd_name`, `id_product`, `produ
 -- Table structure for table `bom_item_old`
 --
 
-DROP TABLE IF EXISTS `bom_item_old`;
 CREATE TABLE `bom_item_old` (
   `id` int(11) NOT NULL,
   `id_bom_old` int(11) NOT NULL,
@@ -925,7 +917,6 @@ INSERT INTO `bom_item_old` (`id`, `id_bom_old`, `id_bd`, `bd_name`, `id_product`
 -- Table structure for table `bom_item_price`
 --
 
-DROP TABLE IF EXISTS `bom_item_price`;
 CREATE TABLE `bom_item_price` (
   `id` int(11) NOT NULL,
   `id_bom_item` int(11) NOT NULL,
@@ -1277,7 +1268,6 @@ INSERT INTO `bom_item_price` (`id`, `id_bom_item`, `item_ratio_engcost`, `item_u
 -- Table structure for table `bom_item_price_old`
 --
 
-DROP TABLE IF EXISTS `bom_item_price_old`;
 CREATE TABLE `bom_item_price_old` (
   `id` int(11) NOT NULL,
   `id_bom_item_old` int(11) NOT NULL,
@@ -1534,13 +1524,12 @@ INSERT INTO `bom_item_price_old` (`id`, `id_bom_item_old`, `item_ratio_engcost`,
 -- Table structure for table `bom_log`
 --
 
-DROP TABLE IF EXISTS `bom_log`;
 CREATE TABLE `bom_log` (
   `id` int(11) NOT NULL,
   `id_bom` int(11) NOT NULL,
   `case_log` varchar(255) DEFAULT NULL,
   `version` varchar(20) NOT NULL,
-  `data_change` text,
+  `data_change` text DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   `create_by` varchar(20) NOT NULL,
   `remark` varchar(255) DEFAULT NULL
@@ -1621,7 +1610,6 @@ INSERT INTO `bom_log` (`id`, `id_bom`, `case_log`, `version`, `data_change`, `cr
 -- Table structure for table `bom_main`
 --
 
-DROP TABLE IF EXISTS `bom_main`;
 CREATE TABLE `bom_main` (
   `id` int(11) NOT NULL,
   `project_name` varchar(255) NOT NULL,
@@ -1689,7 +1677,6 @@ INSERT INTO `bom_main` (`id`, `project_name`, `customer_id`, `customer_name`, `s
 -- Table structure for table `bom_main_old`
 --
 
-DROP TABLE IF EXISTS `bom_main_old`;
 CREATE TABLE `bom_main_old` (
   `id` int(11) NOT NULL,
   `id_bom_main` int(11) NOT NULL,
@@ -1770,7 +1757,6 @@ INSERT INTO `bom_main_old` (`id`, `id_bom_main`, `project_name`, `customer_name`
 -- Table structure for table `bom_poc_status`
 --
 
-DROP TABLE IF EXISTS `bom_poc_status`;
 CREATE TABLE `bom_poc_status` (
   `id_bom` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
@@ -1784,7 +1770,6 @@ CREATE TABLE `bom_poc_status` (
 -- Table structure for table `bom_ref_file`
 --
 
-DROP TABLE IF EXISTS `bom_ref_file`;
 CREATE TABLE `bom_ref_file` (
   `id` int(11) NOT NULL,
   `id_bom` int(11) NOT NULL,
@@ -1800,7 +1785,6 @@ CREATE TABLE `bom_ref_file` (
 -- Table structure for table `bom_ref_file_old`
 --
 
-DROP TABLE IF EXISTS `bom_ref_file_old`;
 CREATE TABLE `bom_ref_file_old` (
   `id` int(11) NOT NULL,
   `id_bom` int(11) NOT NULL,
@@ -1816,7 +1800,6 @@ CREATE TABLE `bom_ref_file_old` (
 -- Table structure for table `bom_sale_log`
 --
 
-DROP TABLE IF EXISTS `bom_sale_log`;
 CREATE TABLE `bom_sale_log` (
   `id` int(11) NOT NULL,
   `id_bom` int(11) NOT NULL,
@@ -1896,7 +1879,6 @@ INSERT INTO `bom_sale_log` (`id`, `id_bom`, `case_log`, `create_date`, `create_b
 -- Table structure for table `bom_solution_log`
 --
 
-DROP TABLE IF EXISTS `bom_solution_log`;
 CREATE TABLE `bom_solution_log` (
   `id` int(11) NOT NULL,
   `id_bom` int(11) NOT NULL,
@@ -1987,7 +1969,6 @@ INSERT INTO `bom_solution_log` (`id`, `id_bom`, `case_log`, `create_date`, `crea
 -- Table structure for table `bom_vm_resource`
 --
 
-DROP TABLE IF EXISTS `bom_vm_resource`;
 CREATE TABLE `bom_vm_resource` (
   `id` int(11) NOT NULL,
   `id_bom` int(11) NOT NULL,
@@ -2029,7 +2010,6 @@ INSERT INTO `bom_vm_resource` (`id`, `id_bom`, `name_server`, `cpu`, `memory`, `
 -- Table structure for table `bom_vm_resource_old`
 --
 
-DROP TABLE IF EXISTS `bom_vm_resource_old`;
 CREATE TABLE `bom_vm_resource_old` (
   `id` int(11) NOT NULL,
   `id_bom_old` int(11) NOT NULL,
@@ -2079,7 +2059,6 @@ INSERT INTO `bom_vm_resource_old` (`id`, `id_bom_old`, `name_server`, `cpu`, `me
 -- Table structure for table `item_info`
 --
 
-DROP TABLE IF EXISTS `item_info`;
 CREATE TABLE `item_info` (
   `id` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
@@ -2883,7 +2862,6 @@ INSERT INTO `item_info` (`id`, `id_product`, `name`, `item_code`, `units`, `pric
 -- Table structure for table `item_log`
 --
 
-DROP TABLE IF EXISTS `item_log`;
 CREATE TABLE `item_log` (
   `id` int(11) NOT NULL,
   `id_item` int(11) NOT NULL,
@@ -3687,7 +3665,6 @@ INSERT INTO `item_log` (`id`, `id_item`, `case_log`, `create_date`, `create_by`)
 -- Table structure for table `product_info`
 --
 
-DROP TABLE IF EXISTS `product_info`;
 CREATE TABLE `product_info` (
   `id` int(11) NOT NULL,
   `id_bd` int(11) NOT NULL,
@@ -3794,7 +3771,9 @@ INSERT INTO `product_info` (`id`, `id_bd`, `name`, `product_code`, `create_date`
 (565, 63, 'SQL Database as a Service', 'VP-01006000', '2019-05-11 16:36:51', '60336', 1),
 (566, 63, 'VM as a Service', 'VP-01002000', '2019-05-11 16:36:51', '60336', 1),
 (567, 63, 'Azure Stack', 'VP-01010000', '2019-05-11 16:36:51', '60336', 1),
-(568, 61, 'testing_product111', '', '2019-06-05 16:01:38', '777777', 0);
+(568, 61, 'testing_product111', '', '2019-06-05 16:01:38', '777777', 1),
+(569, 46, 'fff', NULL, '2019-08-21 09:10:50', '60336', 1),
+(570, 46, 'zz', NULL, '2019-08-21 10:02:34', '60336', 1);
 
 -- --------------------------------------------------------
 
@@ -3802,7 +3781,6 @@ INSERT INTO `product_info` (`id`, `id_bd`, `name`, `product_code`, `create_date`
 -- Table structure for table `product_log`
 --
 
-DROP TABLE IF EXISTS `product_log`;
 CREATE TABLE `product_log` (
   `id` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
@@ -3920,7 +3898,16 @@ INSERT INTO `product_log` (`id`, `id_product`, `case_log`, `create_date`, `creat
 (430, 568, 'CREATE', '2019-06-05 16:01:38', '777777'),
 (431, 568, 'EDIT', '2019-06-05 16:01:45', '777777'),
 (432, 568, 'EDIT', '2019-06-05 16:01:45', '777777'),
-(433, 568, 'BLOCK', '2019-06-05 16:01:47', '777777');
+(433, 568, 'BLOCK', '2019-06-05 16:01:47', '777777'),
+(434, 532, 'BLOCK', '2019-08-21 09:08:10', '60336'),
+(435, 532, 'UNBLOCK', '2019-08-21 09:08:11', '60336'),
+(436, 569, 'CREATE', '2019-08-21 09:10:50', '60336'),
+(437, 570, 'CREATE', '2019-08-21 10:02:34', '60336'),
+(438, 535, 'BLOCK', '2019-08-21 10:05:26', 'undefined'),
+(439, 535, 'UNBLOCK', '2019-08-21 10:06:35', '60336'),
+(440, 568, 'UNBLOCK', '2019-08-21 13:16:13', '777777'),
+(441, 532, 'BLOCK', '2019-08-21 13:44:25', '60336'),
+(442, 532, 'UNBLOCK', '2019-08-21 13:44:26', '60336');
 
 -- --------------------------------------------------------
 
@@ -3928,14 +3915,51 @@ INSERT INTO `product_log` (`id`, `id_product`, `case_log`, `create_date`, `creat
 -- Table structure for table `request_info`
 --
 
-DROP TABLE IF EXISTS `request_info`;
 CREATE TABLE `request_info` (
   `id` int(11) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `main` varchar(255) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
-  `create_by` varchar(20) DEFAULT NULL
+  `create_by` varchar(20) DEFAULT NULL,
+  `inuse` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `request_info`
+--
+
+INSERT INTO `request_info` (`id`, `subject`, `main`, `create_date`, `create_by`, `inuse`) VALUES
+(1, 'ขอแก้ฟอร์มเอกสาร', 'ช่วยแก้รูปแบบไฟล์excelด้วย', '2019-08-21 00:00:00', '000000', 1),
+(2, 'AAAAA', 'bra bra new', '2019-08-21 15:45:17', '000000', 1),
+(3, 'test', 'xxxxxx', '2019-08-21 09:06:06', '444444', 0),
+(4, 'ขอแก้ไขบางค่าในproduct', 'อยากแก้ไขค่าราคาการเติมเงินของ เฟร์ส เป็น1000000 บาท', '2019-08-21 16:24:50', '444444', 0),
+(5, 'เปิดBOMไม่ได้', '5555nono A', '2019-08-22 14:10:35', '777777', 1),
+(9, 'test01', 'asd\n', '2019-08-22 14:22:24', '444444', 0),
+(10, 'test02', 'gimmmi', '2019-08-22 14:26:30', '444444', 1),
+(13, 'test03', 'gggggggggggggggggg\n', '2019-08-22 14:33:25', '444444', 0),
+(14, 'gimmy', 'gimmmy', '2019-08-22 14:35:53', '444444', 0),
+(15, 'gimmynaja', '55555555555555555', '2019-08-22 14:39:14', '444444', 0),
+(18, 'gimmy007', 'ro or ro', '2019-08-23 09:40:10', '444444', 0),
+(19, '8888888', '99999999999', '2019-08-23 09:44:44', '444444', 0),
+(20, 'gggggggggggggggggggg', 'ggggggggggggggg', '2019-08-23 10:01:18', '444444', 0),
+(21, 'hhhhhhh', 'ddddddddddd', '2019-08-23 11:11:52', '444444', 0),
+(22, 'test12', 'test 1212 121221212', '2019-08-23 13:20:04', '444444', 0),
+(23, 'test fffff', 'ggggggggggggggggg', '2019-08-23 13:49:30', '444444', 0),
+(24, 'เฟิร์สเองครับ', 'ผมเอาเงิน บริษัทไปเติมเกม หลายพันเลยครับ ', '2019-08-23 15:07:43', '444444', 0),
+(25, 'test request', 'ตัวอักษรพิเศษ', '2019-08-23 15:56:16', '000000', 1),
+(26, 'test1111', 'test1111111111111', '2019-08-26 09:18:05', '444444', 0),
+(27, 'test0001', '0001', '2019-08-26 10:45:03', '444444', 0),
+(28, 'test0001', 'gogogogo', '2019-08-26 10:45:36', '444444', 0),
+(29, 'hihihii', 'hihihiihhiih', '2019-08-26 13:18:13', '444444', 0),
+(30, 'testgm', 'gimgimmmm', '2019-08-26 13:49:48', '444444', 0),
+(31, 'fufufufu', 'F00000', '2019-08-26 13:51:20', '444444', 0),
+(32, 'ลองspecial char', 'เนื้อหาa', '2019-08-26 13:55:19', '000000', 1),
+(33, 'gimmy', 'gimmyTheKid', '2019-08-26 14:26:25', '444444', 1),
+(34, 'Tawz', 'pitiphon', '2019-08-26 14:26:57', '444444', 1),
+(35, 'bon', 'phutinan', '2019-08-26 14:27:52', '444444', 0),
+(36, 'test11', '11', '2019-08-26 14:55:00', '444444', 1),
+(37, 'vm ผมพัง', 'แก้ให้ด้วยครับ', '2019-08-26 14:55:41', '444444', 1),
+(38, 'เฟิร์ส01', 'ทดสอบระบบการทำงาน', '2019-08-26 16:38:29', '444444', 1);
 
 -- --------------------------------------------------------
 
@@ -3943,14 +3967,191 @@ CREATE TABLE `request_info` (
 -- Table structure for table `request_log`
 --
 
-DROP TABLE IF EXISTS `request_log`;
 CREATE TABLE `request_log` (
   `id` int(11) NOT NULL,
   `id_request` int(11) NOT NULL,
   `case_log` varchar(255) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
-  `create_by` varchar(20) DEFAULT NULL
+  `create_by` varchar(20) DEFAULT NULL,
+  `comment` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `request_log`
+--
+
+INSERT INTO `request_log` (`id`, `id_request`, `case_log`, `create_date`, `create_by`, `comment`) VALUES
+(1, 4, 'CREATE', '2019-08-21 16:24:50', '444444', NULL),
+(2, 4, 'EDIT', '2019-08-21 17:20:52', '444444', NULL),
+(3, 1, 'CREATE', '2019-08-21 00:00:00', '000000', NULL),
+(4, 2, 'CREATE', '2019-08-21 15:45:17', '000000', NULL),
+(5, 3, 'CREATE', '2019-08-21 09:06:06', '444444', NULL),
+(6, 5, 'CREATE', '2019-08-22 14:10:35', '777777', NULL),
+(10, 9, 'CREATE', '2019-08-22 14:22:24', '444444', NULL),
+(11, 10, 'CREATE', '2019-08-22 14:26:30', '444444', NULL),
+(17, 5, 'EDIT', '2019-08-22 14:31:16', '777777', NULL),
+(18, 13, 'CREATE', '2019-08-22 14:33:25', '444444', NULL),
+(19, 14, 'CREATE', '2019-08-22 14:35:53', '444444', NULL),
+(20, 15, 'CREATE', '2019-08-22 14:39:14', '444444', NULL),
+(24, 1, 'APPROVE', '2019-08-22 15:45:51', '60336', 'แก้ไขแล้ว'),
+(25, 3, 'REJECT', '2019-08-22 16:09:36', '60336', 'ไม่รู้เรื่อง'),
+(26, 15, 'EDIT', '2019-08-22 16:36:26', '444444', NULL),
+(27, 15, 'EDIT', '2019-08-22 16:39:43', '444444', NULL),
+(28, 9, 'BLOCK', '2019-08-22 17:03:19', '444444', NULL),
+(29, 15, 'EDIT', '2019-08-22 17:14:03', '444444', NULL),
+(30, 4, 'APPROVE', '2019-08-22 17:22:18', '60336', 'sadasdsa'),
+(31, 1, 'REJECT', '2019-08-22 17:23:20', '60336', 'aaaaaaaaaa'),
+(32, 9, 'UNBLOCK', '2019-08-22 17:23:24', '444444', NULL),
+(33, 9, 'BLOCK', '2019-08-22 17:28:39', '444444', NULL),
+(35, 1, 'REJECT', '2019-08-23 08:57:34', '60336', 'adadda'),
+(37, 15, 'EDIT', '2019-08-23 09:09:31', '444444', NULL),
+(38, 1, 'APPROVE', '2019-08-23 09:14:04', '60336', 'no'),
+(39, 15, 'BLOCK', '2019-08-23 09:19:15', '444444', NULL),
+(40, 14, 'BLOCK', '2019-08-23 09:20:11', '444444', NULL),
+(42, 14, 'BLOCK', '2019-08-23 09:24:41', '444444', NULL),
+(43, 13, 'BLOCK', '2019-08-23 09:26:04', '444444', NULL),
+(45, 1, 'APPROVE', '2019-08-23 09:28:16', '60336', 'dsfsdfsdfsdf'),
+(48, 18, 'CREATE', '2019-08-23 09:40:10', '444444', NULL),
+(49, 18, 'EDIT', '2019-08-23 09:40:52', '444444', NULL),
+(51, 18, 'BLOCK', '2019-08-23 09:43:56', '444444', NULL),
+(52, 14, 'BLOCK', '2019-08-23 09:44:09', '444444', NULL),
+(53, 13, 'EDIT', '2019-08-23 09:44:26', '444444', NULL),
+(54, 19, 'CREATE', '2019-08-23 09:44:44', '444444', NULL),
+(57, 19, 'BLOCK', '2019-08-23 10:00:50', '444444', NULL),
+(58, 18, 'BLOCK', '2019-08-23 10:01:01', '444444', NULL),
+(59, 20, 'CREATE', '2019-08-23 10:01:18', '444444', NULL),
+(60, 13, 'EDIT', '2019-08-23 10:01:33', '444444', NULL),
+(66, 1, 'REJECT', '2019-08-23 10:24:12', '60336', 'งงง'),
+(67, 1, 'APPROVE', '2019-08-23 10:28:36', '60336', 'ssssss'),
+(68, 3, 'EDIT', '2019-08-23 10:33:18', '444444', NULL),
+(69, 3, 'EDIT', '2019-08-23 10:34:36', '444444', NULL),
+(70, 3, 'EDIT', '2019-08-23 10:36:39', '444444', NULL),
+(72, 20, 'BLOCK', '2019-08-23 10:47:23', '444444', NULL),
+(73, 13, 'BLOCK', '2019-08-23 10:47:33', '444444', NULL),
+(74, 1, 'REJECT', '2019-08-23 10:59:55', '60336', 'ssssss'),
+(75, 21, 'CREATE', '2019-08-23 11:11:52', '444444', NULL),
+(76, 21, 'EDIT', '2019-08-23 11:12:15', '444444', NULL),
+(77, 21, 'BLOCK', '2019-08-23 11:12:34', '444444', NULL),
+(78, 5, 'APPROVE', '2019-08-23 13:18:37', '60336', 'แก้แล้ว'),
+(79, 22, 'CREATE', '2019-08-23 13:20:04', '444444', NULL),
+(80, 22, 'EDIT', '2019-08-23 13:20:44', '444444', NULL),
+(81, 22, 'BLOCK', '2019-08-23 13:21:01', '444444', NULL),
+(82, 1, 'APPROVE', '2019-08-23 13:40:04', '60336', 'ssssss'),
+(84, 2, 'APPROVE', '2019-08-23 13:41:55', '60336', NULL),
+(85, 1, 'APPROVE', '2019-08-23 13:42:44', '60336', 'ssssss'),
+(87, 2, 'APPROVE', '2019-08-23 13:46:24', '60336', 'test2'),
+(88, 3, 'REJECT', '2019-08-23 13:46:49', '60336', ''),
+(89, 3, 'REJECT', '2019-08-23 13:47:48', '60336', 'asasa'),
+(90, 23, 'CREATE', '2019-08-23 13:49:30', '444444', NULL),
+(91, 23, 'REJECT', '2019-08-23 13:51:51', '60336', 'ปัญหานี้แก้ไม่ได้'),
+(95, 23, 'BLOCK', '2019-08-23 15:06:03', '444444', NULL),
+(96, 10, 'EDIT', '2019-08-23 15:06:48', '444444', NULL),
+(97, 24, 'CREATE', '2019-08-23 15:07:43', '444444', NULL),
+(98, 3, 'EDIT', '2019-08-23 15:13:37', '444444', NULL),
+(101, 4, 'EDIT', '2019-08-23 15:25:33', '444444', NULL),
+(102, 3, 'EDIT', '2019-08-23 15:26:51', '444444', NULL),
+(103, 4, 'APPROVE', '2019-08-23 15:27:02', '60336', 'แก้ๆๆๆๆ'),
+(104, 10, 'REJECT', '2019-08-23 15:27:35', '60336', 'ไม่มีในสารระบบ'),
+(105, 24, 'REJECT', '2019-08-23 15:27:53', '60336', 'สุรเชดเติม'),
+(106, 3, 'REJECT', '2019-08-23 15:28:13', '60336', 'สุรเฉดส่งเงินให้แม่ด้วย'),
+(107, 2, 'EDIT', '2019-08-23 15:48:18', '000000', NULL),
+(108, 25, 'CREATE', '2019-08-23 15:56:16', '000000', NULL),
+(109, 25, 'APPROVE', '2019-08-23 16:01:29', '60336', 'test char '),
+(110, 2, 'APPROVE', '2019-08-26 09:07:30', '60336', '@@@'),
+(111, 1, 'APPROVE', '2019-08-26 09:12:57', '60336', '~!@#$%^&%*'),
+(112, 26, 'CREATE', '2019-08-26 09:18:05', '444444', NULL),
+(113, 26, 'EDIT', '2019-08-26 09:18:26', '444444', NULL),
+(114, 26, 'EDIT', '2019-08-26 09:19:04', '444444', NULL),
+(115, 3, 'EDIT', '2019-08-26 09:19:48', '444444', NULL),
+(116, 24, 'BLOCK', '2019-08-26 09:20:27', '444444', NULL),
+(117, 3, 'APPROVE', '2019-08-26 09:21:26', '60336', 'aasasasas'),
+(118, 3, 'EDIT', '2019-08-26 09:21:57', '444444', NULL),
+(119, 4, 'BLOCK', '2019-08-26 09:22:31', '444444', NULL),
+(120, 3, 'EDIT', '2019-08-26 09:24:49', '444444', NULL),
+(121, 1, 'APPROVE', '2019-08-26 09:43:13', '60336', '@#$!$'),
+(122, 1, 'REJECT', '2019-08-26 09:57:49', '60336', ',,,,,!#'),
+(123, 1, 'REJECT', '2019-08-26 10:09:21', '60336', '....'),
+(124, 1, 'REJECT', '2019-08-26 10:17:49', '60336', '~~~~`'),
+(125, 1, 'REJECT', '2019-08-26 10:42:48', '60336', 'aaaa'),
+(126, 1, 'REJECT', '2019-08-26 10:43:08', '60336', '@'),
+(127, 1, 'REJECT', '2019-08-26 10:43:38', '60336', '%'),
+(128, 27, 'CREATE', '2019-08-26 10:45:03', '444444', NULL),
+(129, 27, 'BLOCK', '2019-08-26 10:45:17', '444444', NULL),
+(130, 28, 'CREATE', '2019-08-26 10:45:37', '444444', NULL),
+(131, 1, 'REJECT', '2019-08-26 10:46:24', '60336', '&+%@'),
+(132, 1, 'REJECT', '2019-08-26 10:49:32', '60336', '&+%@'),
+(133, 1, 'REJECT', '2019-08-26 11:32:09', '60336', '&+%@'),
+(134, 1, 'REJECT', '2019-08-26 11:32:32', '60336', 'dasdasd'),
+(135, 1, 'REJECT', '2019-08-26 12:56:51', '60336', 'aaaaa'),
+(136, 1, 'REJECT', '2019-08-26 12:57:03', '60336', '#$#$'),
+(137, 1, 'REJECT', '2019-08-26 13:02:43', '60336', 'aaaa'),
+(138, 1, 'REJECT', '2019-08-26 13:03:04', '60336', '#~!'),
+(139, 1, 'REJECT', '2019-08-26 13:08:24', '60336', '#~!'),
+(140, 1, 'REJECT', '2019-08-26 13:08:40', '60336', 'aaaa'),
+(141, 1, 'REJECT', '2019-08-26 13:09:15', '60336', 'aaaa'),
+(142, 1, 'REJECT', '2019-08-26 13:09:22', '60336', 'dasdasdasd'),
+(143, 1, 'REJECT', '2019-08-26 13:09:38', '60336', 'dasdasdasd'),
+(144, 1, 'REJECT', '2019-08-26 13:11:06', '60336', 'dasdasd'),
+(145, 1, 'REJECT', '2019-08-26 13:11:21', '60336', 'aaa'),
+(146, 1, 'REJECT', '2019-08-26 13:11:46', '60336', 'aaaaaaa'),
+(147, 1, 'REJECT', '2019-08-26 13:13:40', '60336', 'sadasd'),
+(148, 1, 'REJECT', '2019-08-26 13:14:39', '60336', '#!#~#'),
+(149, 1, 'REJECT', '2019-08-26 13:14:51', '60336', 'dasdasd'),
+(150, 1, 'REJECT', '2019-08-26 13:17:32', '60336', 'aaaa'),
+(151, 29, 'CREATE', '2019-08-26 13:18:13', '444444', NULL),
+(152, 1, 'REJECT', '2019-08-26 13:19:12', '60336', 'dddd'),
+(153, 10, 'EDIT', '2019-08-26 13:23:08', '444444', NULL),
+(154, 29, 'BLOCK', '2019-08-26 13:24:53', '444444', NULL),
+(155, 28, 'EDIT', '2019-08-26 13:25:09', '444444', NULL),
+(156, 28, 'EDIT', '2019-08-26 13:27:43', '444444', NULL),
+(157, 10, 'APPROVE', '2019-08-26 13:31:12', '60336', 'test special char'),
+(158, 3, 'EDIT', '2019-08-26 13:37:08', '444444', NULL),
+(159, 3, 'EDIT', '2019-08-26 13:43:14', '444444', NULL),
+(160, 3, 'EDIT', '2019-08-26 13:43:58', '444444', NULL),
+(161, 3, 'EDIT', '2019-08-26 13:44:17', '444444', NULL),
+(162, 30, 'CREATE', '2019-08-26 13:49:48', '444444', NULL),
+(163, 31, 'CREATE', '2019-08-26 13:51:20', '444444', NULL),
+(164, 1, 'REJECT', '2019-08-26 13:51:22', '60336', 'aaaa'),
+(165, 31, 'EDIT', '2019-08-26 13:51:48', '444444', NULL),
+(166, 32, 'CREATE', '2019-08-26 13:55:19', '000000', NULL),
+(167, 32, 'APPROVE', '2019-08-26 13:56:24', '60336', 'test special char สอง'),
+(168, 30, 'EDIT', '2019-08-26 13:57:11', '444444', NULL),
+(169, 31, 'EDIT', '2019-08-26 13:58:05', '444444', NULL),
+(170, 31, 'EDIT', '2019-08-26 13:58:56', '444444', NULL),
+(171, 3, 'EDIT', '2019-08-26 14:01:34', '444444', NULL),
+(172, 3, 'APPROVE', '2019-08-26 14:09:28', '60336', 'asasa'),
+(173, 3, 'EDIT', '2019-08-26 14:10:47', '444444', NULL),
+(174, 3, 'EDIT', '2019-08-26 14:13:14', '444444', NULL),
+(175, 3, 'EDIT', '2019-08-26 14:14:00', '444444', NULL),
+(176, 3, 'EDIT', '2019-08-26 14:14:58', '444444', NULL),
+(177, 3, 'EDIT', '2019-08-26 14:17:53', '444444', NULL),
+(178, 31, 'EDIT', '2019-08-26 14:18:10', '444444', NULL),
+(179, 31, 'BLOCK', '2019-08-26 14:20:29', '444444', NULL),
+(180, 30, 'BLOCK', '2019-08-26 14:21:16', '444444', NULL),
+(181, 28, 'BLOCK', '2019-08-26 14:21:18', '444444', NULL),
+(182, 3, 'EDIT', '2019-08-26 14:23:32', '444444', NULL),
+(183, 10, 'EDIT', '2019-08-26 14:23:37', '444444', NULL),
+(184, 26, 'BLOCK', '2019-08-26 14:24:37', '444444', NULL),
+(185, 10, 'EDIT', '2019-08-26 14:25:02', '444444', NULL),
+(186, 26, 'REJECT', '2019-08-26 14:25:53', '60336', 'บัคค'),
+(187, 33, 'CREATE', '2019-08-26 14:26:25', '444444', NULL),
+(188, 33, 'EDIT', '2019-08-26 14:26:40', '444444', NULL),
+(189, 34, 'CREATE', '2019-08-26 14:26:57', '444444', NULL),
+(190, 35, 'CREATE', '2019-08-26 14:27:52', '444444', NULL),
+(191, 3, 'BLOCK', '2019-08-26 14:34:54', '444444', NULL),
+(192, 1, 'APPROVE', '2019-08-26 14:42:07', '60336', 'aaaa'),
+(193, 1, 'REJECT', '2019-08-26 14:42:22', '60336', 'aaaa'),
+(194, 10, 'REJECT', '2019-08-26 14:42:37', '60336', 'aaa'),
+(195, 33, 'REJECT', '2019-08-26 14:50:13', '60336', 'sss'),
+(196, 33, 'APPROVE', '2019-08-26 14:54:52', '60336', 'sss'),
+(197, 36, 'CREATE', '2019-08-26 14:55:00', '444444', NULL),
+(198, 34, 'APPROVE', '2019-08-26 14:55:28', '60336', 'ffff'),
+(199, 37, 'CREATE', '2019-08-26 14:55:41', '444444', NULL),
+(200, 35, 'APPROVE', '2019-08-26 14:56:02', '60336', 'aaaa'),
+(201, 35, 'REJECT', '2019-08-26 14:56:10', '60336', 'aaaa'),
+(202, 38, 'CREATE', '2019-08-26 16:38:29', '444444', NULL),
+(203, 38, 'EDIT', '2019-08-26 16:38:43', '444444', NULL),
+(204, 35, 'BLOCK', '2019-08-26 16:38:55', '444444', NULL);
 
 -- --------------------------------------------------------
 
@@ -3958,7 +4159,6 @@ CREATE TABLE `request_log` (
 -- Table structure for table `request_to`
 --
 
-DROP TABLE IF EXISTS `request_to`;
 CREATE TABLE `request_to` (
   `id` int(11) NOT NULL,
   `id_request` int(11) NOT NULL,
@@ -3971,7 +4171,6 @@ CREATE TABLE `request_to` (
 -- Table structure for table `user_group_info`
 --
 
-DROP TABLE IF EXISTS `user_group_info`;
 CREATE TABLE `user_group_info` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -4018,7 +4217,6 @@ INSERT INTO `user_group_info` (`id`, `name`, `position_type`, `create_date`, `cr
 -- Table structure for table `user_group_relation`
 --
 
-DROP TABLE IF EXISTS `user_group_relation`;
 CREATE TABLE `user_group_relation` (
   `id` int(11) NOT NULL,
   `id_group` int(11) NOT NULL,
@@ -4071,7 +4269,6 @@ INSERT INTO `user_group_relation` (`id`, `id_group`, `id_group_child`, `create_d
 -- Table structure for table `user_info`
 --
 
-DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info` (
   `id` varchar(20) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -4101,7 +4298,6 @@ INSERT INTO `user_info` (`id`, `username`, `tel`, `role`, `position`, `create_da
 -- Table structure for table `user_relation`
 --
 
-DROP TABLE IF EXISTS `user_relation`;
 CREATE TABLE `user_relation` (
   `id` int(11) NOT NULL,
   `id_user` varchar(20) NOT NULL,
@@ -4160,7 +4356,6 @@ INSERT INTO `user_relation` (`id`, `id_user`, `id_group`, `level`, `create_date`
 -- Table structure for table `user_relation_log`
 --
 
-DROP TABLE IF EXISTS `user_relation_log`;
 CREATE TABLE `user_relation_log` (
   `id` int(11) NOT NULL,
   `id_relation` int(11) NOT NULL,
@@ -4454,7 +4649,7 @@ ALTER TABLE `bd_info`
 -- AUTO_INCREMENT for table `bd_log`
 --
 ALTER TABLE `bd_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `bom_bd`
@@ -4586,25 +4781,25 @@ ALTER TABLE `item_log`
 -- AUTO_INCREMENT for table `product_info`
 --
 ALTER TABLE `product_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=569;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=571;
 
 --
 -- AUTO_INCREMENT for table `product_log`
 --
 ALTER TABLE `product_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=434;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=443;
 
 --
 -- AUTO_INCREMENT for table `request_info`
 --
 ALTER TABLE `request_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `request_log`
 --
 ALTER TABLE `request_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 
 --
 -- AUTO_INCREMENT for table `request_to`
