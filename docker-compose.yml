@@ -17,23 +17,25 @@ services:
 #      - /data/mysql:/var/lib/mysql
 
   phpmyadmin:
-   image: phpmyadmin/phpmyadmin
-   links:
-    - db
-   ports:
-    - 80:80
-   environment:
-    PMA_HOST: db
-   depends_on:
-    - db
-
-  web:
-    build: .
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db
     ports:
-      - "9000:9000"
+      - 80:80
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+ # web:
+  #  build: .
+   # ports:
+    #  - "9000:9000"
+    #depends_on:
+     # - db
     # volumes:
     #   - .:/code
-    environment:
-      FLASK_ENV: development
+    #environment:
+      #FLASK_ENV: development
   redis:
     image: "redis:alpine"

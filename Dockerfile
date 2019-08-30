@@ -1,9 +1,11 @@
-FROM django
+FROM python:2
 
 ADD . /bom_portal
-
 WORKDIR /bom_portal
 
-RUN pip install -r requirements.txt
+COPY requirements.tx ./
+RUN pip install --no-cache-dir -r requirements.tx
 
-CMD [ "python", "./run.py runserver 0.0.0.0:9000" ]
+COPY . .
+
+CMD [ "python", "./run.py" ]
