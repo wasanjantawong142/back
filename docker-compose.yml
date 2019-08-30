@@ -15,6 +15,7 @@ services:
     volumes:
       - ./db_dumps:/docker-entrypoint-initdb.d
 #      - /data/mysql:/var/lib/mysql
+
   phpmyadmin:
    image: phpmyadmin/phpmyadmin
    links:
@@ -25,9 +26,14 @@ services:
     PMA_HOST: db
    depends_on:
     - db
-  redis:
-    image: redis:alpine
+
+  web:
+    build: .
     ports:
-      - 2376:2376
-    depends_on:
-     - db
+      - "9000:9000"
+    # volumes:
+    #   - .:/code
+    environment:
+      FLASK_ENV: development
+  redis:
+    image: "redis:alpine"
