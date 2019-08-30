@@ -14,6 +14,7 @@ from ..helper.request_api import get_staff_intranet
 import json
 import requests
 from oneplatform.oneid import OneIDApi
+from validator import Required, Not, Truthy, Blank, Range, Equals, In, validate
 
 one_id = {
     "client_id": "53",
@@ -46,6 +47,26 @@ def createUser():
         "position",
     ]
 
+    rules = {
+        "account_title_th": [Required, Truthy()],
+        "first_name_th": [Required, Truthy()],
+        "last_name_th": [Required, Truthy()],
+        "account_title_eng": [Required, Truthy()],
+        "first_name_eng": [Required, Truthy()],
+        "last_name_eng": [Required, Truthy()],
+        "id_card_type": [Required, Truthy()],
+        "id_card_type": [Required, Truthy()],
+        "id_card_num": [Required, Truthy()],
+        "email": [Required, Truthy()],
+        "mobile_no": [Required, Truthy()],
+        "birth_date": [Required, Truthy()],
+        "username": [Required, Truthy()],
+        "password": [Required, Truthy()],
+        "position": [Required, Truthy()],
+    }
+
+    valid_rules = validate(rules, data_create)
+    if(valid_rules.valid == False): return json_response({"message": valid_rules.errors}, 400)
 
     _,missing_key = check_parameter(data_create.keys(), parameter_check)
     if missing_key != [] : return json_response({"message": "Missing parameter: " + ",".join(missing_key)}, 400)

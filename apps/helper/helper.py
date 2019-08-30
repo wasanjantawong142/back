@@ -238,16 +238,12 @@ def validator(text, pattern):
     # Compile request pattern into regular expression
     pattern_compiled = re.compile(pattern)
     return (True if pattern_compiled.match(text)!=None else False)
-# def validSpecialCharacters(word):
-#     if re.match("^[a-zA-Z0-9_]*$", word):
-#         return "Valid"
-#     else:
-#         return "Invalid"
+
 def check_validator(data):
     for k in data:
         # print "---------- text --------------"
         # print data[text]
-        if(not validator(data[k], "^[a-zA-Z0-9_]*$")):
+        if(not validator(str(data[k]), "[a-zA-Z0-9ก-ฮ_/*-+.!@#$%^&*()=]")):
             return False, str(k) +  ' can not use special characters'
     return True, "Valid"
 

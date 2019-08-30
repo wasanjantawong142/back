@@ -7,6 +7,7 @@ from ..authener import controller as authener
 from sqlalchemy.sql.expression import or_,and_,func
 from ..database import db
 import datetime
+from validator import Required, Not, Truthy, Blank, Range, Equals, In, validate
 sess = db.session
 # import re
 
@@ -62,6 +63,15 @@ def createGroup():
     _,missing_key = check_parameter(data_create.keys(), parameter_check)
     if missing_key != [] : return json_response({"message": "Missing parameter: " + ",".join(missing_key)}, 400)
     
+    rules = {
+        "name": [Required, Truthy()],
+        "position_type": [Required, Truthy()],
+        "create_by": [Required, Truthy()]
+    }
+
+    valid_rules = validate(rules, data_create)
+    if(valid_rules.valid == False): return json_response({"message": valid_rules.errors}, 400)
+    
     status_check_valid, msg_valid = check_validator(data_create)
     if(not status_check_valid): return json_response({"message": msg_valid}, 400)
 
@@ -92,6 +102,16 @@ def editGroup():
     parameter_check = ["id", "name","position_type","create_by"]
     _,missing_key = check_parameter(data_edit.keys(), parameter_check)
     if missing_key != [] : return json_response({"message": "Missing parameter: " + ",".join(missing_key)}, 400)
+
+    rules = {
+        "id": [Required, Truthy()],
+        "name": [Required, Truthy()],
+        "position_type": [Required, Truthy()],
+        "create_by": [Required, Truthy()]
+    }
+
+    valid_rules = validate(rules, data_edit)
+    if(valid_rules.valid == False): return json_response({"message": valid_rules.errors}, 400)
 
     status_check_valid, msg_valid = check_validator(data_edit)
     if(not status_check_valid): return json_response({"message": msg_valid}, 400)

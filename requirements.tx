@@ -4,4 +4,6 @@ xlsxwriter==1.1.8
 pymongo==3.8.0
 redis==3.2.1
 pymysql==0.9.3
+pycrypto
+validator.py
 pyoneplatform
