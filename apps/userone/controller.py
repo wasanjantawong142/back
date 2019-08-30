@@ -101,7 +101,7 @@ def createUser():
                 main = "accountID: "+ str(return_data['accountID']) + ", email: " + str(return_data['email']) + ", username: " + data_create['username'] + ", role: " + data_create['role'] + ", tel: " + data_create['mobile_no'] + ", position: " + data_create['position'],
                 create_by = "0",
                 create_date = str(datetime.datetime.utcnow() + datetime.timedelta(hours=7)),
-                # inuse = True
+                inuse = True
             )
             sess.add(new_request)
 
@@ -117,6 +117,8 @@ def createUser():
 
             sess.add(new_request_log)
             sess.commit()
+        print "----------------------------- data return oneid -------------------"
+        print data
         return json_response(data, 200)
     except Exception as e:
         print "register eror: " ,e
