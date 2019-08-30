@@ -9,11 +9,8 @@ from .group.routing import routes as group_route
 from .bd.routing import routes as bd_route
 from .report.routing import routes as report_route
 from .openapi.routing import routes as open_api
-<<<<<<< HEAD
 from .userone.routing import routes as userone_route
-=======
 from .request.routing import routes as request_route
->>>>>>> 907953f2f01a802f17d1bb14a82cada125a546a1
 from .app import app
 
 
@@ -32,11 +29,7 @@ def init_routes():
     app.register_blueprint(bd_route,url_prefix="/api/v1/bds")
     app.register_blueprint(report_route,url_prefix="/api/v1/reports")
     app.register_blueprint(open_api,url_prefix="/api/v1/open_api")
-<<<<<<< HEAD
     app.register_blueprint(userone_route,url_prefix="/api/v1/userone")
-=======
     app.register_blueprint(request_route,url_prefix="/api/v1/requests")
->>>>>>> 907953f2f01a802f17d1bb14a82cada125a546a1
-
 
 # print 'finish init routing'
