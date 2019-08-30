@@ -8,7 +8,7 @@ import uuid
 import datetime
 
 cache = redis.Redis(
-    host='127.0.0.1',
+    host='203.154.83.127',
     port=6379)
 
 db = SQLAlchemy(app)
