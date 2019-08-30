@@ -365,6 +365,7 @@ class Request(db.Model):
     main = db.Column(db.String(255))
     create_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     create_by = db.Column(db.Integer)
+    inuse = db.Column(db.Boolean, nullable = False)
 
 class Request_To(db.Model):
     __tablename__ = 'request_to'
@@ -380,6 +381,7 @@ class Request_Log(db.Model):
     case_log = db.Column(db.String(255))
     create_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     create_by = db.Column(db.Integer)
+    comment = db.Column(db.Text)
     _request_info = db.relationship('Request')
 
 class Bom_POC_Status(db.Model):

@@ -177,13 +177,7 @@ def apiLogin():
         _,missing_key = check_parameter(data.keys(), ["username","password","state"])
         if missing_key != []: return json_response({"message": "Missing parameter: " + ",".join(missing_key)}, 400)
         if data["username"] != "" and data["password"] != "":
-            # print '------------'
-            # result_login_one = login_one_id(data)
-            # print '444444444444'
-            result_login_one = {}
-            result_login_one['access_token'] = "123"
-            result_login_one['refresh_token'] = "as"
-            result_login_one['result'] = "as"
+            result_login_one = login_one_id(data)
             if result_login_one["result"] != "Fail":
                 username = data['username'].split('@')
                 # user = user + '@one.th'
@@ -200,10 +194,7 @@ def apiLogin():
                         relation_group['group_name'] = group_dict['name']
                         relation_group['user_level'] = relation_dict['level']
                         relation_list.append(relation_group)
-                    # profile_one = profile_one_id(result_login_one['access_token'])
-                    profile_one = {}
-                    profile_one['first_name_th'] = "test"
-                    profile_one['last_name_th'] = "last"
+                    profile_one = profile_one_id(result_login_one['access_token'])
                     access_token, refresh_token, expire = generate_token(user.id, user.username, user.role, data["state"],result_login_one['access_token'],result_login_one['refresh_token'],profile_one['first_name_th'],profile_one['last_name_th'])
                     session_time = datetime.datetime.now() + datetime.timedelta(minutes=SESSION_TIME)
                     value = datetime.datetime.fromtimestamp(float(expire))
@@ -240,11 +231,7 @@ def apiLoginAdmin():
         _,missing_key = check_parameter(data.keys(), ["username","password","state"])
         if missing_key != []: return json_response({"message": "Missing parameter: " + ",".join(missing_key)}, 400)
         if data["username"] != "" and data["password"] != "":
-            # result_login_one = login_one_id(data)
-            result_login_one = {}
-            result_login_one['access_token'] = "123"
-            result_login_one['refresh_token'] = "as"
-            result_login_one['result'] = "as"
+            result_login_one = login_one_id(data)
             if result_login_one["result"] != "Fail":
                 username = data['username'].split('@')
                 # user = user + '@one.th'
@@ -263,11 +250,7 @@ def apiLoginAdmin():
                         relation_list.append(relation_group)
                     if user.role != "admin":
                         return json_response({"message": "Error Role user is not Admin"}, 400)
-                    
-                    # profile_one = profile_one_id(result_login_one['access_token'])
-                    profile_one = {}
-                    profile_one['first_name_th'] = "test"
-                    profile_one['last_name_th'] = "last"
+                    profile_one = profile_one_id(result_login_one['access_token'])
                     access_token, refresh_token, expire = generate_token(user.id, user.username, user.role, data["state"],result_login_one['access_token'],result_login_one['refresh_token'],profile_one['first_name_th'],profile_one['last_name_th'])
                     session_time = datetime.datetime.now() + datetime.timedelta(minutes=SESSION_TIME)
                     value = datetime.datetime.fromtimestamp(float(expire))

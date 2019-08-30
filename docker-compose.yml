@@ -7,35 +7,14 @@ services:
     ports:
       - 3306:3306
     environment:
-      - MYSQL_DATABASE=bom_demo_test
+      - MYSQL_DATABASE=bom
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=user
-      - MYSQL_ROOT_PASSWORD=toor
-      - MYSQL_USER=user
+      - MYSQL_PASSWORD=0ogTvgfbo0kdwx
+      - MYSQL_ROOT_PASSWORD=0ogTvgfbo0kdwx
     volumes:
       - ./db_dumps:/docker-entrypoint-initdb.d
 #      - /data/mysql:/var/lib/mysql
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    links:
-      - db
-    ports:
-      - 80:80
-    environment:
-      PMA_HOST: db
-    depends_on:
-      - db
-
- # web:
-  #  build: .
-   # ports:
-    #  - "9000:9000"
-    #depends_on:
-     # - db
-    # volumes:
-    #   - .:/code
-    #environment:
-      #FLASK_ENV: development
   redis:
-    image: "redis:alpine"
+    image: redis:alpine
+    ports:
+      - 2376:2376
