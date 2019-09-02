@@ -100,7 +100,7 @@ def editUser():
     _,missing_key = check_parameter(data_edit.keys(), parameter_check)
     if missing_key != [] : return json_response({"message": "Missing parameter: " + ",".join(missing_key)}, 400)
     try:
-        update_user = User.query.filter_by(id = data_edit["id"]).update(dict(username = data_edit['name'], id= data_edit['user_code'], tel= data_edit['tel'], role = data_edit['role'], position = data_edit['position']))
+        update_user = User.query.filter_by(id = data_edit["id"]).update(dict(username = data_edit['name'], tel= data_edit['tel'], role = data_edit['role'], position = data_edit['position']))
         update_user = User_Relation.query.filter_by(id_user = data_edit["id"]).update(dict(inuse = False))
         new_relation = User_Relation(
             id_user = data_edit["id"],
