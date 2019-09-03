@@ -106,10 +106,11 @@ def editBD():
     _,missing_key = check_parameter(data_edit.keys(), parameter_check)
     if missing_key != [] : return json_response({"message": "Missing parameter: " + ",".join(missing_key)}, 400)
     try:
-        check_bd_name = sess.query(BD).filter((BD.name == data_edit['name'])).first()
-        if check_bd_name is not None:
-            print check_bd_name
-            return json_response({"message": "BD name is use by another"},400)
+        # check_bd_name = sess.query(BD).filter((BD.name == data_edit['name'])).first()
+        # if check_bd_name is not None:
+        #     print check_bd_name
+        #     return json_response({"message": "BD name is use by another"},400)
+        # check nsme
 
         update_BD = BD.query.filter_by(id =data_edit["id"]).update(dict(name = data_edit['name'], type = data_edit['type'], ratio_engcost = data_edit['ratio_engcost']))
         new_bd_log = BD_Log(
