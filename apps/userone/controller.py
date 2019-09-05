@@ -37,7 +37,6 @@ def createUser():
         "first_name_eng",
         "last_name_eng",
         "id_card_type",
-        "id_card_type",
         "id_card_num",
         "email",
         "mobile_no",
@@ -117,6 +116,9 @@ def createUser():
 
             sess.add(new_request_log)
             sess.commit()
+        else:
+            return json_response(data, 400)
+            
         print "----------------------------- data return oneid -------------------"
         print data
         return json_response(data, 200)
