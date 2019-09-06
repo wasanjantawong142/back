@@ -44,7 +44,8 @@ def createUser():
         "username",
         "password",
         "position",
-        "usercode"
+        "usercode",
+        "user_group"
     ]
 
     rules = {
@@ -64,6 +65,7 @@ def createUser():
         "password": [Required, Truthy()],
         "position": [Required, Truthy()],
         "usercode": [Required, Truthy()],
+        "user_group": [Required, Truthy()],
     }
 
     valid_rules = validate(rules, data_create)
@@ -99,7 +101,7 @@ def createUser():
             return_data = data['data']
             new_request = Request(
                 subject = "สมาชิกใหม่",
-                main = "accountID: "+ str(return_data['accountID']) + ", email: " + str(return_data['email']) + ", username: " + data_create['username'] + ", role: " + data_create['role'] + ", tel: " + data_create['mobile_no'] + ", position: " + data_create['position'] + ", usercode: " + data_create['usercode'],
+                main = "accountID: "+ str(return_data['accountID']) + ", email: " + str(return_data['email']) + ", username: " + data_create['username'] + ", role: " + data_create['role'] + ", tel: " + data_create['mobile_no'] + ", position: " + data_create['position'] + ", usercode: " + data_create['usercode'] + + ", usergroup: " + data_create['user_group'],
                 create_by = "0",
                 create_date = str(datetime.datetime.utcnow() + datetime.timedelta(hours=7)),
                 inuse = True
