@@ -102,7 +102,7 @@ def createUser():
             new_request = Request(
                 subject = "สมาชิกใหม่",
                 main = "accountID: "+ str(return_data['accountID']) + ", email: " + str(return_data['email']) + ", username: " + data_create['username'] + ", role: " + data_create['role'] + ", tel: " + data_create['mobile_no'] + ", position: " + data_create['position'] + ", usercode: " + data_create['usercode'] + ", usergroup: " + data_create['user_group'],
-                create_by = "0",
+                create_by = "",
                 create_date = str(datetime.datetime.utcnow() + datetime.timedelta(hours=7)),
                 inuse = True
             )
@@ -115,7 +115,7 @@ def createUser():
                     id_request = request_dict["id"],
                     case_log = "CREATE",
                     create_date = str(datetime.datetime.utcnow() + datetime.timedelta(hours=7)),
-                    create_by = "0"
+                    create_by = ""
                 )
 
             sess.add(new_request_log)

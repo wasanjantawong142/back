@@ -45,13 +45,18 @@ def createUser():
     global sess
     data = request.json
     data_create = data['data_create']
-    parameter_check = ["name","role","level","tel","position","group","create_by"]
+    parameter_check = ["name","role","level","tel","position","group","create_by", "user_code"]
     _,missing_key = check_parameter(data_create.keys(), parameter_check)
     if missing_key != [] : return json_response({"message": "Missing parameter: " + ",".join(missing_key)}, 400)
     try:
         user_info = sess.query(User).filter((User.username == data_create['name'])).first()
         if user_info is not None:
             return json_response({"message": "user is in database", "status": 'fail'},400)
+
+        user_info = sess.query(User).filter((User.id == data_create['user_code'])).first()
+        if user_info is not None:
+            return json_response({"message": "duplicate usercode", "status": 'fail'},400)
+
         new_user = User(
             id = data_create.get("user_code", None),
             username = data_create.get("name", None),
@@ -96,14 +101,18 @@ def editUser():
     data = request.json
     data_edit = data['data_edit']
     print data_edit
-    parameter_check = ["id","name","role","tel","level","position","group","create_by"]
+    parameter_check = ["user_code","name","role","tel","level","position","group","create_by"]
     _,missing_key = check_parameter(data_edit.keys(), parameter_check)
     if missing_key != [] : return json_response({"message": "Missing parameter: " + ",".join(missing_key)}, 400)
     try:
+        user_info = sess.query(User).filter((User.id == data_edit['user_code'])).first()
+        if user_info is not None:
+            return json_response({"message": "duplicate usercode", "status": 'fail'},400)
+
         update_user = User.query.filter_by(id = data_edit["id"]).update(dict(username = data_edit['name'], tel= data_edit['tel'], role = data_edit['role'], position = data_edit['position']))
         update_user = User_Relation.query.filter_by(id_user = data_edit["id"]).update(dict(inuse = False))
         new_relation = User_Relation(
-            id_user = data_edit["id"],
+            id_user = data_edit["user_code"],
             id_group = data_edit['group'],
             level = data_edit['level'],
             create_by = data_edit.get("create_by", None),
